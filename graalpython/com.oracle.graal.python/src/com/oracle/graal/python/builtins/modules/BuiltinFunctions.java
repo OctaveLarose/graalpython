@@ -316,7 +316,7 @@ public final class BuiltinFunctions extends PythonBuiltins {
         static boolean doDict(VirtualFrame frame,
                               PDict hc,
                               @Cached PyObjectIsTrueNode isTrueNode) {
-            return true;
+            return checkHashKeys(hc, frame, isTrueNode);
         }
 
         @Specialization
@@ -359,6 +359,15 @@ public final class BuiltinFunctions extends PythonBuiltins {
             return true;
         }
 
+        static boolean checkHashKeys(PHashingCollection hashingCollection,
+                                        VirtualFrame frame,
+                                        PyObjectIsTrueNode isTrueNode) {
+            for (Object key: hashingCollection.keys())
+                if (!isTrueNode.execute(frame, key))
+                    return false;
+            return true;
+        }
+
         static boolean checkHashEntries(PHashingCollection hashingCollection,
                                         VirtualFrame frame,
                                         PyObjectIsTrueNode isTrueNode) {
@@ -390,7 +399,7 @@ public final class BuiltinFunctions extends PythonBuiltins {
         static boolean doDict(VirtualFrame frame,
                               PDict hc,
                               @Cached PyObjectIsTrueNode isTrueNode) {
-            return checkHashEntries(hc, frame, isTrueNode);
+            return checkHashKeys(hc, frame, isTrueNode);
         }
 
         @Specialization
@@ -431,6 +440,15 @@ public final class BuiltinFunctions extends PythonBuiltins {
                 if (isTrueNode.execute(frame, internalArray[i]))
                     return true;
             return false;
+        }
+
+        static boolean checkHashKeys(PHashingCollection hashingCollection,
+                                     VirtualFrame frame,
+                                     PyObjectIsTrueNode isTrueNode) {
+            for (Object key: hashingCollection.keys())
+                if (!isTrueNode.execute(frame, key))
+                    return false;
+            return true;
         }
 
         static boolean checkHashEntries(PHashingCollection hashingCollection,
