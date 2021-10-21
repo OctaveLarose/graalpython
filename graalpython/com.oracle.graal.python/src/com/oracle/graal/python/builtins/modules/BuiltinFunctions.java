@@ -353,9 +353,10 @@ public final class BuiltinFunctions extends PythonBuiltins {
             public static boolean checkGenericSequenceStorage(SequenceStorage sequenceStorage,
                                                        VirtualFrame frame,
                                                        PyObjectIsTrueNode isTrueNode,
+                                                       SequenceStorageNodes.LenNode lenNode,
                                                        NodeType nodeType) {
                 Object[] internalArray = sequenceStorage.getInternalArray();
-                for (int i = 0; i < sequenceStorage.length(); i++) {
+                for (int i = 0; i < lenNode.execute(sequenceStorage); i++) {
                     switch (nodeType) {
                         case ALL:
                             if (!isTrueNode.execute(frame, internalArray[i])) {
@@ -378,13 +379,14 @@ public final class BuiltinFunctions extends PythonBuiltins {
         protected boolean checkSequenceStorage(SequenceStorage seq,
                                                VirtualFrame frame,
                                                PyObjectIsTrueNode isTrueNode,
+                                               SequenceStorageNodes.LenNode lenNode,
                                                NodeType nodeType) {
             if (seq instanceof IntSequenceStorage) {
                 return SequenceStorageIterationNode.checkIntSequenceStorage((IntSequenceStorage) seq, frame, isTrueNode, nodeType);
             } else if (seq instanceof BoolSequenceStorage) {
                 return SequenceStorageIterationNode.checkBooleanSequenceStorage((BoolSequenceStorage) seq, frame, isTrueNode, nodeType);
             } else {
-                return SequenceStorageIterationNode.checkGenericSequenceStorage(seq, frame, isTrueNode, nodeType);
+                return SequenceStorageIterationNode.checkGenericSequenceStorage(seq, frame, isTrueNode, lenNode, nodeType);
             }
         }
 
@@ -421,16 +423,18 @@ public final class BuiltinFunctions extends PythonBuiltins {
         public boolean doList(VirtualFrame frame,
                               PList object,
                               @SuppressWarnings("unused") @Cached GetClassNode getClassNode,
+                              @Cached SequenceStorageNodes.LenNode lenNode,
                               @Cached PyObjectIsTrueNode isTrueNode) {
-            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, nodeType);
+            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, lenNode, nodeType);
         }
 
         @Specialization(guards = "cannotBeOverridden(object, getClassNode)", limit = "1")
         public boolean doTuple(VirtualFrame frame,
                                PTuple object,
                                @SuppressWarnings("unused") @Cached GetClassNode getClassNode,
+                               @Cached SequenceStorageNodes.LenNode lenNode,
                                @Cached PyObjectIsTrueNode isTrueNode) {
-            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, nodeType);
+            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, lenNode, nodeType);
         }
 
         @Specialization(guards = "cannotBeOverridden(object, getClassNode)", limit = "1")
@@ -484,16 +488,18 @@ public final class BuiltinFunctions extends PythonBuiltins {
         public boolean doList(VirtualFrame frame,
                               PList object,
                               @SuppressWarnings("unused") @Cached GetClassNode getClassNode,
+                              @Cached SequenceStorageNodes.LenNode lenNode,
                               @Cached PyObjectIsTrueNode isTrueNode) {
-            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, nodeType);
+            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, lenNode, nodeType);
         }
 
         @Specialization(guards = "cannotBeOverridden(object, getClassNode)", limit = "1")
         public boolean doTuple(VirtualFrame frame,
                                PTuple object,
                                @SuppressWarnings("unused") @Cached GetClassNode getClassNode,
+                               @Cached SequenceStorageNodes.LenNode lenNode,
                                @Cached PyObjectIsTrueNode isTrueNode) {
-            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, nodeType);
+            return checkSequenceStorage(object.getSequenceStorage(), frame, isTrueNode, lenNode, nodeType);
         }
 
         @Specialization(guards = "cannotBeOverridden(object, getClassNode)", limit = "1")
