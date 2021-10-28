@@ -313,8 +313,10 @@ public final class BuiltinFunctions extends PythonBuiltins {
                 boolean[] internalArray = sequenceStorage.getInternalBoolArray();
 
                 for (int i = 0; i < sequenceStorage.length(); i++) {
-                    if (shouldStopIteration(frame, internalArray[i], nodeType)) {
-                        return nodeType != NodeType.ALL;
+                    if (nodeType == NodeType.ALL && !isTrueNode.execute(frame, internalArray[i])) {
+                        return false;
+                    } else if (isTrueNode.execute(frame, internalArray[i])) { // ANY case
+                        return true;
                     }
                 }
 
@@ -327,8 +329,10 @@ public final class BuiltinFunctions extends PythonBuiltins {
                 int[] internalArray = sequenceStorage.getInternalIntArray();
 
                 for (int i = 0; i < sequenceStorage.length(); i++) {
-                    if (shouldStopIteration(frame, internalArray[i], nodeType)) {
-                        return nodeType != NodeType.ALL;
+                    if (nodeType == NodeType.ALL && !isTrueNode.execute(frame, internalArray[i])) {
+                        return false;
+                    } else if (isTrueNode.execute(frame, internalArray[i])) { // ANY case
+                        return true;
                     }
                 }
 
@@ -340,24 +344,15 @@ public final class BuiltinFunctions extends PythonBuiltins {
                                                NodeType nodeType) {
                 Object[] internalArray = sequenceStorage.getInternalArray();
                 for (int i = 0; i < lenNode.execute(sequenceStorage); i++) {
-                    if (shouldStopIteration(frame, internalArray[i], nodeType)) {
-                        return nodeType != NodeType.ALL;
+                    if (nodeType == NodeType.ALL && !isTrueNode.execute(frame, internalArray[i])) {
+                        return false;
+                    } else if (isTrueNode.execute(frame, internalArray[i])) { // ANY case
+                        return true;
                     }
                 }
 
                 return nodeType == NodeType.ALL;
             }
-
-            private static boolean shouldStopIteration(VirtualFrame frame,
-                                                  Object obj,
-                                                  NodeType nodeType) {
-                if (nodeType == NodeType.ALL) {
-                    return !isTrueNode.execute(frame, obj);
-                } else { // ANY case
-                    return isTrueNode.execute(frame, obj);
-                }
-            }
-
         }
 
         protected boolean checkSequenceStorage(SequenceStorage seq,
