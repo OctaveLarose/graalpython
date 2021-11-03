@@ -109,6 +109,7 @@ MICRO_BENCHMARKS = {
 }
 
 MICRO_BENCHMARKS_SMALL = {
+    'all-any': ITER_6 + WARMUP_2 + ['10'],
     'arith-modulo-sized': ITER_6 + WARMUP_2 + ['1'],
     'attribute-access-polymorphic': ITER_6 + WARMUP_2 + ['20'],
     'attribute-access': ITER_6 + WARMUP_2 + ['100'],
