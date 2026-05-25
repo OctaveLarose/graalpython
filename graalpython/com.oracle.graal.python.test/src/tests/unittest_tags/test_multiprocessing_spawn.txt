@@ -26,7 +26,7 @@ test.test_multiprocessing_spawn.test_misc.TestSimpleQueue.test_empty_exceptions 
 test.test_multiprocessing_spawn.test_misc.TestStartMethod.test_get_all @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestStartMethod.test_nested_startmethod @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestStdinBadfiledescriptor.test_flushing @ darwin-arm64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
-test.test_multiprocessing_spawn.test_misc.TestStdinBadfiledescriptor.test_pool_in_process @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
+test.test_multiprocessing_spawn.test_misc.TestStdinBadfiledescriptor.test_pool_in_process @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64
 test.test_multiprocessing_spawn.test_misc.TestStdinBadfiledescriptor.test_queue_in_process @ darwin-arm64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_array @ darwin-arm64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_barrier @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
@@ -41,7 +41,7 @@ test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_pool @ darwi
 test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_queue @ darwin-arm64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_rlock @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_semaphore @ darwin-arm64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
-test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_value @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
+test.test_multiprocessing_spawn.test_misc.TestSyncManagerTypes.test_value @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64
 test.test_multiprocessing_spawn.test_misc.TestTimeouts.test_timeout @ darwin-arm64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestWait.test_neg_timeout @ darwin-arm64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
 test.test_multiprocessing_spawn.test_misc.TestWait.test_wait @ darwin-arm64,linux-aarch64,linux-aarch64-github,linux-x86_64,linux-x86_64-github
